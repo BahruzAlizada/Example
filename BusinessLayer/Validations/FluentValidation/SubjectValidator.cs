@@ -1,5 +1,5 @@
 ﻿using EntityLayer.Concrete;
-using EntityLayer.Dtos;
+using EntityLayer.Dtos.SubjectDto;
 using FluentValidation;
 using System;
 

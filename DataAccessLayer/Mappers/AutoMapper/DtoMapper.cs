@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EntityLayer.Concrete;
-using EntityLayer.Dtos;
+using EntityLayer.Dtos.SubjectDto;
 using System;
 
 namespace DataAccessLayer.Mappers.AutoMapper

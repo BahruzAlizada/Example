@@ -45,16 +45,13 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Quetsion", b =>
+            modelBuilder.Entity("EntityLayer.Concrete.Chapter", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -69,6 +66,82 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("SubjectId");
+
+                    b.ToTable("Chapters");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.ChapterPart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChapterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChapterId");
+
+                    b.ToTable("ChapterParts");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Lesson", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChapterPartId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChapterPartId")
+                        .IsUnique();
+
+                    b.ToTable("Lessons");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Quetsion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChapterPartId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChapterPartId");
 
                     b.ToTable("Quetsions");
                 });
@@ -129,15 +202,48 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Quetsion");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Quetsion", b =>
+            modelBuilder.Entity("EntityLayer.Concrete.Chapter", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Subject", "Subject")
-                        .WithMany("Quetsions")
+                        .WithMany("Chapters")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.ChapterPart", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Chapter", "Chapter")
+                        .WithMany()
+                        .HasForeignKey("ChapterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chapter");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Lesson", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.ChapterPart", "ChapterPart")
+                        .WithOne("Lesson")
+                        .HasForeignKey("EntityLayer.Concrete.Lesson", "ChapterPartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChapterPart");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Quetsion", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.ChapterPart", "ChapterPart")
+                        .WithMany()
+                        .HasForeignKey("ChapterPartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChapterPart");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Variant", b =>
@@ -151,6 +257,12 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Quetsion");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.ChapterPart", b =>
+                {
+                    b.Navigation("Lesson")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Quetsion", b =>
                 {
                     b.Navigation("Answer")
@@ -161,7 +273,7 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Subject", b =>
                 {
-                    b.Navigation("Quetsions");
+                    b.Navigation("Chapters");
                 });
 #pragma warning restore 612, 618
         }

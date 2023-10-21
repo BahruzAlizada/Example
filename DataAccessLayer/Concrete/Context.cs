@@ -13,6 +13,9 @@ namespace DataAccessLayer.Concrete
         }
 
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Chapter> Chapters { get; set; }
+        public DbSet<ChapterPart> ChapterParts { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Quetsion> Quetsions { get; set; }
         public DbSet<Variant> Variants { get; set; }
         public DbSet<Answer> Answers { get; set; }

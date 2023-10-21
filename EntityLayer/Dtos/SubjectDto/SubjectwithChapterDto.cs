@@ -1,10 +1,11 @@
 ﻿using CoreLayer.Entities;
+using EntityLayer.Concrete;
 using System;
 
 
-namespace EntityLayer.Concrete
+namespace EntityLayer.Dtos.SubjectDto
 {
-    public class Subject : IEntity
+    public class SubjectwithChapterDto : IDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

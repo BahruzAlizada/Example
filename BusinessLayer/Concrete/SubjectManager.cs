@@ -2,7 +2,7 @@
 using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
-using EntityLayer.Dtos;
+using EntityLayer.Dtos.SubjectDto;
 using System;
 
 namespace BusinessLayer.Concrete
@@ -37,6 +37,16 @@ namespace BusinessLayer.Concrete
         public List<SubjectDto> GetSubjects()
         {
             return subjectDal.GetSubjects();
+        }
+
+        public List<SubjectwithChapterDto> GetSubjectswithChapter()
+        {
+            return subjectDal.GetSubjectswithChapter();
+        }
+
+        public SubjectwithChapterDto GetSubjectwithChapter(int id)
+        {
+            return subjectDal.GetSubjectwithChapter(id);
         }
 
         public void Update(SubjectDto subjectDto)

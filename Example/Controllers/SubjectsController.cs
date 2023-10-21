@@ -1,6 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
-using EntityLayer.Dtos;
+using EntityLayer.Dtos.SubjectDto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,6 +31,24 @@ namespace Example.Controllers
         {
             var subject = subjectService.GetSubject(id);
             return Ok(subject);
+        }
+        #endregion
+
+        #region GetSubjectswithChapter
+        [HttpGet("GetSubjectswithChapter")]
+        public IActionResult GetSubjectswithChapter()
+        {
+            var results = subjectService.GetSubjectswithChapter();
+            return Ok(results);
+        }
+        #endregion
+
+        #region GetSubjectwithChapter
+        [HttpGet("GetSubjectwithChapter/{id}")]
+        public IActionResult GetSubjectwithChapter(int id)
+        {
+            var result = subjectService.GetSubjectwithChapter(id);
+            return Ok(result);
         }
         #endregion
 

@@ -26,12 +26,74 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Quetsions",
+                name: "Chapters",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SubjectId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Chapters", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Chapters_Subjects_SubjectId",
+                        column: x => x.SubjectId,
+                        principalTable: "Subjects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChapterParts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ChapterId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChapterParts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ChapterParts_Chapters_ChapterId",
+                        column: x => x.ChapterId,
+                        principalTable: "Chapters",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Lessons",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ChapterPartId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lessons", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Lessons_ChapterParts_ChapterPartId",
+                        column: x => x.ChapterPartId,
+                        principalTable: "ChapterParts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Quetsions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ChapterPartId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -40,9 +102,9 @@ namespace DataAccessLayer.Migrations
                 {
                     table.PrimaryKey("PK_Quetsions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Quetsions_Subjects_SubjectId",
-                        column: x => x.SubjectId,
-                        principalTable: "Subjects",
+                        name: "FK_Quetsions_ChapterParts_ChapterPartId",
+                        column: x => x.ChapterPartId,
+                        principalTable: "ChapterParts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -95,9 +157,25 @@ namespace DataAccessLayer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Quetsions_SubjectId",
-                table: "Quetsions",
+                name: "IX_ChapterParts_ChapterId",
+                table: "ChapterParts",
+                column: "ChapterId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Chapters_SubjectId",
+                table: "Chapters",
                 column: "SubjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Lessons_ChapterPartId",
+                table: "Lessons",
+                column: "ChapterPartId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Quetsions_ChapterPartId",
+                table: "Quetsions",
+                column: "ChapterPartId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Variants_QuetsionId",
@@ -112,10 +190,19 @@ namespace DataAccessLayer.Migrations
                 name: "Answers");
 
             migrationBuilder.DropTable(
+                name: "Lessons");
+
+            migrationBuilder.DropTable(
                 name: "Variants");
 
             migrationBuilder.DropTable(
                 name: "Quetsions");
+
+            migrationBuilder.DropTable(
+                name: "ChapterParts");
+
+            migrationBuilder.DropTable(
+                name: "Chapters");
 
             migrationBuilder.DropTable(
                 name: "Subjects");
