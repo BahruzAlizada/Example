@@ -2,17 +2,14 @@
 using System;
 
 
-namespace EntityLayer.Concrete
+namespace EntityLayer.Dtos.ChapterDto
 {
-    public class Chapter : IEntity
+    public class ChapterDto : IDto
     {
         public int Id { get; set; }
         public int SubjectId { get; set; }
 
         public string Name { get; set; }
         public bool Status { get; set; } = true;
-
-        public Subject Subject { get; set; }
-        public List<ChapterPart> ChapterPart { get; set; }
     }
 }

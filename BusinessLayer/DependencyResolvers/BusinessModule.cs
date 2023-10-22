@@ -14,6 +14,9 @@ namespace BusinessLayer.DependencyResolvers
         {
             services.AddScoped<ISubjectService, SubjectManager>();
             services.AddScoped<ISubjectDal, EFSubjectDal>();
+
+            services.AddScoped<IChapterService, ChapterManager>();
+            services.AddScoped<IChapterDal, EFChapterDal>();
         }
     }
 }

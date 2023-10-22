@@ -26,8 +26,8 @@ namespace DataAccessLayer.EntityFramework
                     Id = item.Id,
                     Name = item.Name,
                     Status = item.Status,
-                    Chapters = item.Chapters.Select(x=> new Chapter { Id=x.Id , Name=x.Name})
-                    .Where(x => x.SubjectId == item.Id).ToList()
+                    Chapters = item.Chapters.Where(x => x.SubjectId == item.Id)
+                    .Select(x=> new Chapter { Id=x.Id , Name=x.Name}).ToList()
                 };
                 subjectwithChapterDtos.Add(dto);
             }
@@ -46,8 +46,8 @@ namespace DataAccessLayer.EntityFramework
                 Id = subject.Id,
                 Name = subject.Name,
                 Status = subject.Status,
-                Chapters = subject.Chapters.Select(x => new Chapter { Id = x.Id, Name = x.Name })
-                    .Where(x => x.SubjectId == subject.Id).ToList()
+                Chapters = subject.Chapters.Where(x => x.SubjectId == subject.Id).
+                Select(x => new Chapter { Id = x.Id, Name = x.Name }).ToList()
             };
 
             return subjectwithChapterDto;
