@@ -1,18 +1,15 @@
 ﻿using CoreLayer.Entities;
 using System;
 
-namespace EntityLayer.Concrete
+
+namespace EntityLayer.Dtos.ChapterPartDto
 {
-    public class ChapterPart : IEntity
+    public class ChapterPartDto : IDto
     {
         public int Id { get; set; }
         public int ChapterId { get; set; }
 
         public string Name { get; set; }
         public bool Status { get; set; } = true;
-
-        public List<Quetsion> Quetsions { get; set; }
-        public Chapter Chapter { get; set; }
-        public Lesson Lesson { get; set; }
     }
 }

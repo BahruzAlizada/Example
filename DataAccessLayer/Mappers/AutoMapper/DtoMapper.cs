@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EntityLayer.Concrete;
 using EntityLayer.Dtos.ChapterDto;
+using EntityLayer.Dtos.ChapterPartDto;
 using EntityLayer.Dtos.SubjectDto;
 using System;
 
@@ -12,6 +13,7 @@ namespace DataAccessLayer.Mappers.AutoMapper
         {
             CreateMap<Subject, SubjectDto>().ReverseMap();
             CreateMap<Chapter, ChapterDto>().ReverseMap();
+            CreateMap<ChapterPart, ChapterPartDto>().ReverseMap();    
         }
     }
 }

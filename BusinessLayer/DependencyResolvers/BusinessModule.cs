@@ -17,6 +17,9 @@ namespace BusinessLayer.DependencyResolvers
 
             services.AddScoped<IChapterService, ChapterManager>();
             services.AddScoped<IChapterDal, EFChapterDal>();
+
+            services.AddScoped<IChapterPartService, ChapterPartManager>();
+            services.AddScoped<IChapterPartDal, EFChapterPartDal>();
         }
     }
 }
