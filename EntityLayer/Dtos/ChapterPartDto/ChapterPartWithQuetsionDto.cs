@@ -1,4 +1,4 @@
-﻿using CoreLayer.Entities;
+﻿using Core.Entities;
 using EntityLayer.Concrete;
 using System;
 

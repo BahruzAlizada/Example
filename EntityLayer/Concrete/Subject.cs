@@ -1,6 +1,5 @@
-﻿using CoreLayer.Entities;
-using System;
-
+﻿using System;
+using Core.Entities;
 
 namespace EntityLayer.Concrete
 {

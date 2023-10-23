@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace CoreLayer.Entities
+namespace Core.Entities
 {
     public interface IEntity
     {

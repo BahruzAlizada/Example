@@ -20,6 +20,12 @@ namespace BusinessLayer.DependencyResolvers
 
             services.AddScoped<IChapterPartService, ChapterPartManager>();
             services.AddScoped<IChapterPartDal, EFChapterPartDal>();
+
+            services.AddScoped<IQuetsionService, QuetsionManager>();
+            services.AddScoped<IQuetsionDal, EFQuetsionDal>();
+
+            services.AddScoped<IVariantService, VariantManager>();
+            services.AddScoped<IVariantDal, EFVariantDal>();
         }
     }
 }

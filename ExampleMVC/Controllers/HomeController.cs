@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace ExampleMVC.Controllers
 {
-    [EnableCors]
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -17,16 +17,8 @@ namespace ExampleMVC.Controllers
             this.clientFactory = clientFactory;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var client = clientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7083/api/Subjects/GetSubjects");
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<SubjectModel>>(jsonData);
-                return View(values);
-            }
             return View();
         }
 

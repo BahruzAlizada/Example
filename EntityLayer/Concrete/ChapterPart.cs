@@ -1,4 +1,4 @@
-﻿using CoreLayer.Entities;
+﻿using Core.Entities;
 using System;
 
 namespace EntityLayer.Concrete

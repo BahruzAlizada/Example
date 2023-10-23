@@ -1,13 +1,11 @@
-﻿using Core.Entities;
-using System;
-
-
-namespace EntityLayer.Dtos.SubjectDto
+﻿
+namespace ExampleMVC.Models
 {
-    public class SubjectDto : IDto
+    public class SubjectWithChapter
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public bool Status { get; set; } = true;
+        public List<string> Chapters { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using CoreLayer.Entities;
+﻿using Core.Entities;
 using System.Linq.Expressions;
 
 namespace Core.DataAccess
@@ -10,7 +10,7 @@ namespace Core.DataAccess
         Task AddAsync(TEntity entity);
         void Delete(TEntity entity);
         void Update(TEntity entity);
-        void UpdateAsync(TEntity entity);
+        Task UpdateAsync(TEntity entity);
         List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null);
         Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> filter = null);
         TEntity Get(Expression<Func<TEntity, bool>> filter = null);

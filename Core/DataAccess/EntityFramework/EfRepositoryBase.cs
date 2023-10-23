@@ -1,4 +1,4 @@
-﻿using CoreLayer.Entities;
+﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -82,7 +82,7 @@ namespace Core.DataAccess.EntityFramework
             context.SaveChanges();
         }
 
-        public async void UpdateAsync(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
             using var context = new TContext();
             var updateEntity = context.Entry(entity);
